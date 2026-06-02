@@ -1,1 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Play Offs and Finals — Notts Masters Badminton</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
 
+    header {
+      background: #0a1a33;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #13294b;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 8px 15px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #0a1a33;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      text-align: center;
+      background: #0a1a33;
+      color: white;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Notts Masters Badminton</h1>
+  <p>County Masters Play Offs and Finals</p>
+</header>
+
+<!-- Shared nav include -->
+<div id="nav"></div>
+<script>
+  fetch("/Home/nav.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("nav").innerHTML = data;
+    });
+</script>
+
+<div class="container">
+  <h2>Select Season</h2>
+  <p>Choose a season to view.</p>
+
+  <div class="list">
+    <a class="card" href="https://be.tournamentsoftware.com/sport/clubstandings.aspx?id=61F175EA-F09D-4BB4-8E42-2AD1DAE6BB9F&cid=26" target="_blank" rel="noopener noreferrer">2026</a>
+    <a class="card" href="https://be.tournamentsoftware.com/sport/teammatch.aspx?id=A0595233-BDD8-4886-ABF3-5C25AF6408D5&match=2593" target="_blank" rel="noopener noreferrer">Over 50s Final Vs Hampshire O50 - 2024</a>
+    <a class="card" href="https://be.tournamentsoftware.com/sport/teammatch.aspx?id=A0595233-BDD8-4886-ABF3-5C25AF6408D5&match=2598" target="_blank" rel="noopener noreferrer">Over 50s Finals Vs Wiltshire - 2024</a>
+    <a class="card" href="https://be.tournamentsoftware.com/sport/teammatch.aspx?id=A0595233-BDD8-4886-ABF3-5C25AF6408D5&match=2890" target="_blank" rel="noopener noreferrer">Over 50s Playoffs Vs Bedfordshire - 2024</a>
+    <a class="card" href="https://be.tournamentsoftware.com/sport/teammatch.aspx?id=D25C355F-DF40-4856-ABF2-E633FA12282F&match=2598" target="_blank" rel="noopener noreferrer">Over 50s Finals Vs West of Scotland - 2023</a>
+    <a class="card" href="https://be.tournamentsoftware.com/sport/teammatch.aspx?id=D25C355F-DF40-4856-ABF2-E633FA12282F&match=2593" target="_blank" rel="noopener noreferrer">Over 50s Finals Vs Hampshire - 2023</a>
+    <a class="card" href="https://be.tournamentsoftware.com/sport/teammatch.aspx?id=D25C355F-DF40-4856-ABF2-E633FA12282F&match=2609" target="_blank" rel="noopener noreferrer">Over 55s Finals Vs Worcestershire - 2023</a>
+    <a class="card" href="https://be.tournamentsoftware.com/sport/teammatch.aspx?id=D25C355F-DF40-4856-ABF2-E633FA12282F&match=2605" target="_blank" rel="noopener noreferrer">Over 55s Finals Vs Essex - 2023</a>
+    <a class="card" href="https://be.tournamentsoftware.com/sport/teammatch.aspx?id=D25C355F-DF40-4856-ABF2-E633FA12282F&match=2622" target="_blank" rel="noopener noreferrer">Over 60s Finals Vs Yorkshire - 2023</a>
+    <a class="card" href="https://be.tournamentsoftware.com/sport/teammatch.aspx?id=D25C355F-DF40-4856-ABF2-E633FA12282F&match=2619" target="_blank" rel="noopener noreferrer">Over 60s Finals Vs Essex - 2023</a>
+  </div>
+</div>
+
+<footer>
+  © Notts Masters Badminton — Play Offs and Finals
+</footer>
+
+</body>
+</html>
