@@ -21,7 +21,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 // REPLACE with your Apps Script Web App URL
-const SCRIPT_URL = "YOUR_APPS_SCRIPT_WEB_APP_URL";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzVyybiZpUBjJ1MidS8ZFk-XgPfFlm2rZuAWAXBW99wxgNURZLCuxxRS6IR5lq5zLhN4w/exec";
 
 const loginScreen = document.getElementById("login-screen");
 const dashboard = document.getElementById("dashboard");
