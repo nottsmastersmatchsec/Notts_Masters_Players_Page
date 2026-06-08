@@ -1,48 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard</title>
-  <script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-    const supabase = createClient(
-      "https://oqibuxukayzipkqxejjj.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xaWJ1eHVrYXl6aXBrcXhlampqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MTY5MDcsImV4cCI6MjA5NjQ5MjkwN30.rG3saM2ayExDzSjMFnI9x1NVza4SmVIJ7UbAI9NGpH0"
-    );
-
-    window.onload = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-
-      if (!user) {
-        window.location.href = "login.html";
-        return;
-      }
-
-      document.getElementById("email").textContent = user.email;
-      document.getElementById("userid").textContent = user.id;
-    };
-
-    window.logout = async () => {
-      await supabase.auth.signOut();
-      window.location.href = "login.html";
-    };
-  </script>
-
+  <meta charset="UTF-8" />
+  <title>Member Dashboard</title>
   <style>
-    body { font-family: Arial; padding:40px; }
-    .card { background:white; max-width:500px; margin:auto; padding:25px;
-      border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
-    button { padding:10px 20px; background:#cc0000; color:white; border:none;
-      border-radius:6px; cursor:pointer; }
+    body { font-family: system-ui, sans-serif; max-width: 600px; margin: 40px auto; }
+    button { margin-top: 16px; padding: 8px 14px; }
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; background: #eee; margin-left: 8px; font-size: 0.85rem; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>Welcome!</h2>
-    <p><strong>Email:</strong> <span id="email"></span></p>
-    <p><strong>User ID:</strong> <span id="userid"></span></p>
+  <h1>Member Dashboard</h1>
+  <div id="content"></div>
+  <button id="logout">Log out</button>
 
-    <button onclick="logout()">Log out</button>
-  </div>
+  <script>
+    const raw = localStorage.getItem("clubSession");
+    if (!raw) {
+      window.location.href = "login.html";
+    }
+
+    let session;
+    try {
+      session = JSON.parse(raw);
+    } catch {
+      localStorage.removeItem("clubSession");
+      window.location.href = "login.html";
+    }
+
+    if (!session || !session.loggedIn) {
+      window.location.href = "login.html";
+    }
+
+    const content = document.getElementById("content");
+    content.innerHTML = `
+      <p>Welcome, <strong>${session.firstname} ${session.surname}</strong></p>
+      <p>Email: ${session.email_address}</p>
+      <p>Membership ID: ${session.be_number}</p>
+      <p>Age group: ${session.age_group || "N/A"}</p>
+      <p>Role:
+        <span class="tag">
+          ${session.captain_selector ? session.captain_selector : "Player"}
+        </span>
+      </p>
+    `;
+
+    document.getElementById("logout").addEventListener("click", () => {
+      localStorage.removeItem("clubSession");
+      window.location.href = "login.html";
+    });
+  </script>
 </body>
 </html>
