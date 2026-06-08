@@ -50,19 +50,22 @@
   <h2>Dashboard</h2>
   <p id="roleDisplay">Loading your role…</p>
 
-  <!-- ROLE‑BASED BUTTONS -->
+  <!-- ADMIN -->
   <button id="adminBtn" class="menu-btn" style="display:none;" onclick="location.href='roles/admin.html'">
     Admin Panel
   </button>
 
+  <!-- CAPTAIN + SELECTOR -->
   <button id="captainBtn" class="menu-btn" style="display:none;" onclick="location.href='roles/captain.html'">
-    Captain Area
+    Captain & Selector Area
   </button>
 
+  <!-- FINANCE -->
   <button id="financeBtn" class="menu-btn" style="display:none;" onclick="location.href='roles/finance.html'">
     Finance Area
   </button>
 
+  <!-- COORDINATOR -->
   <button id="coordBtn" class="menu-btn" style="display:none;" onclick="location.href='roles/coordinator.html'">
     Coordinator Area
   </button>
@@ -100,17 +103,29 @@
     const role = data.role;
     document.getElementById("roleDisplay").innerText = "Your role: " + role;
 
-    // SHOW BUTTONS BASED ON ROLE
+    // ADMIN sees everything
     if (role === "admin") {
       adminBtn.style.display = "block";
       captainBtn.style.display = "block";
       financeBtn.style.display = "block";
       coordBtn.style.display = "block";
+      return;
     }
 
-    if (role === "captain") captainBtn.style.display = "block";
-    if (role === "finance") financeBtn.style.display = "block";
-    if (role === "coordinator") coordBtn.style.display = "block";
+    // CAPTAIN + SELECTOR
+    if (role === "captain" || role === "selector") {
+      captainBtn.style.display = "block";
+    }
+
+    // FINANCE
+    if (role === "finance") {
+      financeBtn.style.display = "block";
+    }
+
+    // COORDINATOR
+    if (role === "coordinator") {
+      coordBtn.style.display = "block";
+    }
   }
 
   loadUserRole();
