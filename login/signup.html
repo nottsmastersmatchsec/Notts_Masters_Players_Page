@@ -16,7 +16,7 @@
 <p><a href="login.html">Already have an account? Log in</a></p>
 
 <script>
-  const supabase = supabase.createClient(
+  const supabase = window.supabase.createClient(
     "https://oqibuxukayzipkqxejjj.supabase.co",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xaWJ1eHVrYXl6aXBrcXhlampqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MTY5MDcsImV4cCI6MjA5NjQ5MjkwN30.rG3saM2ayExDzSjMFnI9x1NVza4SmVIJ7UbAI9NGpH0"
   );
@@ -39,6 +39,7 @@
     window.location.href = "login.html";
   }
 </script>
+
 
 </body>
 </html>
