@@ -1,1 +1,52 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Set New Password</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<h2>Choose a New Password</h2>
+
+<input id="newpass" type="password" placeholder="New password"><br><br>
+<button onclick="updatePass()">Update Password</button>
+
+<script>
+  const supabase = supabase.createClient(
+    "YOUR_SUPABASE_URL",
+    "YOUR_SUPABASE_ANON_KEY"
+  );
+
+  let recoverySession = false;
+
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (event === "PASSWORD_RECOVERY") {
+      recoverySession = true;
+    }
+  });
+
+  async function updatePass() {
+    if (!recoverySession) {
+      alert("Invalid or expired reset link.");
+      return;
+    }
+
+    const newPassword = document.getElementById("newpass").value;
+
+    const { data, error } = await supabase.auth.updateUser({
+      password: newPassword
+    });
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    alert("Password updated. You can now log in.");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>
