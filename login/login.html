@@ -159,7 +159,7 @@
 
     if (error) return errorEl.textContent = "Something went wrong.";
     if (!data) return errorEl.textContent = "No member found with those details.";
-    if (data.dob !== dobInput) return errorEl.textContent = "Date of birth does not match.";
+    if (data.dob !== dobInput) return errorEl.textContent = "No member found with those details.";
 
     localStorage.setItem("clubSession", JSON.stringify({
       loggedIn: true,
