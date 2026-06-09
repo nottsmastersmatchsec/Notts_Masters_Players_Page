@@ -122,7 +122,15 @@
   }
 
   const role = (session.captain_selector || "").toLowerCase().trim();
-  const name = session.first_name || "Captain";
+
+  // FIXED: detect name from any field
+  const name =
+    session.first_name ||
+    session.firstname ||
+    session.forename ||
+    session.name ||
+    session.full_name ||
+    "Captain";
 
   // Update header welcome text
   welcomeText.textContent = `Welcome – ${name}`;
@@ -150,6 +158,7 @@
     `;
   }
 </script>
+
 
 </body>
 </html>
