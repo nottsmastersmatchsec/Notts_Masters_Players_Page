@@ -210,6 +210,7 @@
 
     await fetch(WEB_APP_URL, {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
 
@@ -225,7 +226,10 @@
     const list = document.getElementById("datesList");
     list.innerHTML = "Loading…";
 
-    const res = await fetch(`${WEB_APP_URL}?action=getAvailability&email=${encodeURIComponent(email)}`);
+    const res = await fetch(
+      `${WEB_APP_URL}?action=getAvailability&email=${encodeURIComponent(email)}`
+    );
+
     const data = await res.json();
 
     if (!data.length) {
