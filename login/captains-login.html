@@ -139,22 +139,39 @@
     e.preventDefault();
     errorEl.textContent = "";
 
-    const email = email.value.trim().toLowerCase();
-    const beNumber = be_number.value.trim();
-    const dobInput = dob.value;
+    // ⭐ FIXED: avoid overwriting the variable name "email"
+    const emailInput = document.getElementById("email").value.trim().toLowerCase();
+    const beNumberInput = document.getElementById("be_number").value.trim();
+    const dobInput = document.getElementById("dob").value; // YYYY-MM-DD
 
-    const { data } = await supabaseClient
+    // ⭐ Query Supabase
+    const { data, error } = await supabaseClient
       .from("profiles")
       .select("*")
-      .eq("email_address", email)
-      .eq("be_number", beNumber)
+      .eq("email_address", emailInput)
+      .eq("be_number", beNumberInput)
       .maybeSingle();
 
-    if (!data || data.dob !== dobInput) {
+    if (error) {
+      console.error(error);
+      errorEl.textContent = "Something went wrong. Please try again.";
+      return;
+    }
+
+    if (!data) {
       errorEl.textContent = "No member found with those details.";
       return;
     }
 
+    // ⭐ FIXED: normalise Supabase DOB (removes timezone)
+    const supaDob = data.dob?.split("T")[0];
+
+    if (supaDob !== dobInput) {
+      errorEl.textContent = "No member found with those details.";
+      return;
+    }
+
+    // ⭐ Check role
     const role = (data.captain_selector || "").toLowerCase().trim();
 
     if (role !== "captain" && role !== "selector") {
@@ -162,10 +179,17 @@
       return;
     }
 
-    localStorage.setItem("clubSession", JSON.stringify({ loggedIn: true, ...data }));
+    // ⭐ Save session
+    localStorage.setItem(
+      "clubSession",
+      JSON.stringify({ loggedIn: true, ...data })
+    );
 
+    // ⭐ Redirect
     window.location.href = "/Home/captains/access.html";
   });
+</script>
+
 </script>
 
 </body>
